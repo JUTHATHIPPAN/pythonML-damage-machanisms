@@ -12,7 +12,6 @@ def predict(data: dict):
     postWeldHeatTreatment = data.postWeldHeatTreatment
     modelFluid = data.modelFluid
     MBHW = data.MBHW
-
     input_data = pd.DataFrame(
                                 {
                                     'material': [material], 

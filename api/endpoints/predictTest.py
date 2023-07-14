@@ -211,5 +211,5 @@ def process_request(request: DamagePredictionRequest):
         and h2sContains is not None \
         and pH is not None :
         damage_info.append(damageModel24.predict(request))
-        
+    
     return DamagePredictionResponse(damage_info=damage_info)

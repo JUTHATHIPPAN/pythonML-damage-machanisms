@@ -1,6 +1,7 @@
 import joblib
 import pandas as pd
 import numpy as np
+import math
 
 modelNumber = 14
 damageName = "Chloride Stress Corrosion Cracking"
@@ -8,14 +9,13 @@ damageName = "Chloride Stress Corrosion Cracking"
 loaded_model = joblib.load('./models_ml/damages/model'+str(modelNumber)+'.joblib')
 
 def predict(data: dict):
-    material = data.material
-    operatingTemperature = data.operatingTemperature
-    postWeldHeatTreatment = data.postWeldHeatTreatment
-    modelFluid = data.modelFluid
-    waterContains = data.waterContains
+    material = data.material if data.material is not None else 0
+    operatingTemperature = data.operatingTemperature if not math.isnan(data.operatingTemperature) else 0
+    postWeldHeatTreatment = data.postWeldHeatTreatment if data.postWeldHeatTreatment is not None else 0
+    modelFluid = data.modelFluid if data.modelFluid is not None else 0
+    waterContains = data.waterContains if not math.isnan(data.waterContains) else 0
     externalEnvironment = data.externalEnvironment if data.externalEnvironment is not None else 0
-    pH = data.pH
-
+    pH = data.pH if not math.isnan(data.pH) else 0
     input_data = pd.DataFrame(
                                 {
                                     'material': [material], 

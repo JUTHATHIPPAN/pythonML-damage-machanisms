@@ -4,8 +4,10 @@ from fastapi.responses import JSONResponse
 from api.endpoints.users import router as user_router
 from api.endpoints.predict import router as predict_router
 from api.endpoints.predictTest import router as predictTest_router
-from api.endpoints.test import router as test_router
 from api.endpoints.materialMatching import router as material_matching_router
+from api.endpoints.account.signUp import router as signUp_router
+from api.endpoints.account.signIn import router as signIn_router
+from api.endpoints.predictImport import router as predictImport_router
 
 app = FastAPI()
 
@@ -23,8 +25,10 @@ async def get_openapi_endpoint():
     return JSONResponse(get_openapi(title="Your API Title", version="1.0.0", routes=app.routes))
 
 app.include_router(user_router, prefix="/users")
-app.include_router(test_router, prefix="/test")
 app.include_router(predict_router, prefix="/predict",tags=["Predictor"])
 app.include_router(material_matching_router, prefix="/materialmatching",tags=["Material Matching"])
 app.include_router(predictTest_router, prefix="/predictTest",tags=["Predict Testing"])
+app.include_router(signUp_router, prefix="/signUp",tags=["Account"])
+app.include_router(signIn_router, prefix="/signIn",tags=["Account"])
+app.include_router(predictImport_router, prefix="/predictImport",tags=["Predict Testing"])
 

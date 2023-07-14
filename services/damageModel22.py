@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 import numpy as np
-
+import math
 modelNumber = 22
 damageName = "Oxidation"
 
@@ -9,8 +9,8 @@ loaded_model = joblib.load('./models_ml/damages/model'+str(modelNumber)+'.joblib
 
 def predict(data: dict):
     material = data.material
-    operatingTemperature = data.operatingTemperature
-    oxygenExist = data.oxygenExist if data.oxygenExist is not None else 0
+    operatingTemperature = data.operatingTemperature if not math.isnan(data.operatingTemperature) else 0
+    oxygenExist = data.oxygenExist if not math.isnan(data.oxygenExist) else 0
 
     input_data = pd.DataFrame(
                                 {
