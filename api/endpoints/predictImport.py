@@ -785,4 +785,3 @@ async def equipmentList(Req:equipmentReq):
         print('Error:', str(e))
         raise HTTPException(status_code=500, detail='Internal Server Error')
 
-
